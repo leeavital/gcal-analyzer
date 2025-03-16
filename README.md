@@ -1,6 +1,7 @@
 # How to use
 
-1. Load the calendar.gs file into a google app scripts projects (at https://script.google.com/).
-2. Run the script, it will take a while and spit out a JSON file
-3. pipe the JSON into TODO
+1. create a new spreadsheet
+1. create a bound "app script" by selecting "extensions -> app script" in the spreadsheet
+1. copy calendar.gs into the edit
+1. run the script and wait
 
