@@ -50,17 +50,28 @@ function crawlCalendars() {
 
   let ss = SpreadsheetApp.getActiveSheet();
 
-  ss.setActiveRange(ss.getRange("A1:A1"));
+  ss.setActiveSelection(ss.getRange("A1:A1"));
+
+  ss.getRange("A1:D1").setValues([
+    ["title", "times per week", "duration (minutes)", "minutes per week"],
+  ]);
+  let rowNum = 2;
   for (title in data) {
     if (data.hasOwnProperty(title)) {
       console.log(title, data[title]);
-      ss.appendRow([
-        title,
-        getTimesPerWeek(data[title]["recurrence"]),
-        data[title]["duration"],
+      ss.getRange(`A${rowNum}:D${rowNum}`).setValues([
+        [
+          title,
+          getTimesPerWeek(data[title]["recurrence"]),
+          data[title]["duration"],
+          `=B${rowNum}*C${rowNum}`,
+        ],
       ]);
     }
+    rowNum += 1;
   }
+
+  ss.getRange("H10:I10").setValues([["hours per week", "=SUM($D$2:$D)/60"]]);
 }
 
 function getTimesPerWeek(rrule) {
